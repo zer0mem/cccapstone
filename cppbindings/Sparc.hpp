@@ -8,12 +8,8 @@ class CSparcArch :
 protected:
 	CSparcArch(
 		__in unsigned int mode,
-		__in cs_opt_type optType,
-		__in cs_opt_value optValue,
-		__in const char* comment,
-		__in cs_opt_type skipDataType,
-		__in cs_opt_skipdata skipData
-		) : CDisasmbler(mode, comment, cs_arch::CS_ARCH_SPARC, optType, optValue, skipDataType, skipData)
+		__in const char* comment
+		) : CDisasmbler(mode, comment, cs_arch::CS_ARCH_SPARC)
 	{
 	}
 

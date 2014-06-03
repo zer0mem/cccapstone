@@ -1,19 +1,9 @@
 #pragma once
 
-#include <capstone.h>
-#include <memory>
+#include "CsCapstoneWrap.h"
 
-struct CS_HANDLE :
-	protected std::unique_ptr<csh, decltype(&cs_close)>
-{
-	csh Handle;
-	CS_HANDLE() :
-		std::unique_ptr<csh, decltype(&cs_close)>(&Handle, cs_close)
-	{
-	}
-};
-
-class CCsOpcodeInfoWrapper
+class CCsOpcodeInfoWrapper :
+	protected CCsHandleHolder
 {	
 protected:
 	__forceinline
@@ -23,7 +13,7 @@ protected:
 		__in unsigned int groupId
 		)
 	{
-		return cs_insn_group(m_csh.Handle, &ins, groupId);
+		return cs_insn_group(CsHandle(), &ins, groupId);
 	}
 
 	__forceinline
@@ -33,7 +23,7 @@ protected:
 		__in unsigned int regId
 		)
 	{
-		return cs_reg_read(m_csh.Handle, &ins, regId);
+		return cs_reg_read(CsHandle(), &ins, regId);
 	}
 
 	__forceinline
@@ -43,7 +33,7 @@ protected:
 		__in unsigned int regId
 		)
 	{
-		return cs_reg_write(m_csh.Handle, &ins, regId);
+		return cs_reg_write(CsHandle(), &ins, regId);
 	}
 
 	__forceinline
@@ -53,7 +43,7 @@ protected:
 		__in unsigned int opType
 		)
 	{
-		return cs_op_count(m_csh.Handle, &ins, opType);
+		return cs_op_count(CsHandle(), &ins, opType);
 	}
 
 	__forceinline
@@ -64,7 +54,7 @@ protected:
 		__in unsigned int opcodePosition = 0
 		)
 	{
-		return cs_op_index(m_csh.Handle, &ins, opType, opcodePosition);
+		return cs_op_index(CsHandle(), &ins, opType, opcodePosition);
 	}
 
 	__forceinline
@@ -73,7 +63,7 @@ protected:
 		__in unsigned int reg
 		)
 	{
-		return cs_reg_name(m_csh.Handle, reg);
+		return cs_reg_name(CsHandle(), reg);
 	}
 
 	__forceinline
@@ -82,9 +72,6 @@ protected:
 		__in unsigned int ins
 		)
 	{
-		return cs_insn_name(m_csh.Handle, ins);
+		return cs_insn_name(CsHandle(), ins);
 	}
-
-protected:
-	CS_HANDLE m_csh;
 };

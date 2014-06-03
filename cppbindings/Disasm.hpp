@@ -1,75 +1,37 @@
 #pragma once
 
-#include <capstone.h>
-#include <memory>
-
+#include "CsCapstoneWrap.h"
 #include "CsOpcodeInfoWrap.hpp"
+#include "CsAdvOptionsWrap.hpp"
 #include "InsInfo.hpp"
 
-struct CS_PLATFORM
-{
-	cs_arch Arch;
-	cs_mode Mode;
-	const char* Comment;
-	cs_opt_type Type;
-	cs_opt_value Value;
-
-	cs_opt_type SkipDataType;
-	cs_opt_skipdata SkipData;
-};
-
-struct CS_INSN_HOLDER
-{
-	size_t Size;
-	const void* Address;
-
-	size_t Count;
-	cs_insn* Instructions;
-
-	CS_INSN_HOLDER(
-		__in const void* address,
-		__in size_t size
-		) : Address(address), 
-			Size(size)
-	{
-		Count = 0;
-		Instructions = nullptr;
-	}
-
-	~CS_INSN_HOLDER()
-	{
-		cs_free(Instructions, Count);
-	}
-};
-
 class CDisasmbler :
-	public CCsOpcodeInfoWrapper
+	protected CCsHandleHolder,
+	public CCsOpcodeInfoWrapper,
+	public CCsAdvancedOptionsWrapper
 {
+	struct CS_PLATFORM
+	{
+		cs_arch Arch;
+		cs_mode Mode;
+		const char* Comment;
+	};
 public:
 	CDisasmbler(
 		__in unsigned int mode,
 		__in const char* comment,
-		__in cs_arch arch,
-		__in cs_opt_type type,
-		__in cs_opt_value value,
-		__in cs_opt_type skipDataType = static_cast<cs_opt_type>(0),
-		__in cs_opt_skipdata skipData = { nullptr, nullptr, nullptr }
-		) : m_platform({ arch, static_cast<cs_mode>(mode), nullptr, type, value, skipDataType, skipData })
+		__in cs_arch arch
+		) : m_platform({ arch, static_cast<cs_mode>(mode), nullptr })
 	{
-		m_err = cs_open(m_platform.Arch, m_platform.Mode, &m_csh.Handle);
-		if (m_err)
-			return;
-
-		if (m_platform.Type)
-			cs_option(m_csh.Handle, m_platform.Type, m_platform.Value);
-
-		if (!skipDataType)
-			return;
-
-		cs_option(m_csh.Handle, CS_OPT_SKIPDATA, CS_OPT_ON);
-		cs_option(m_csh.Handle, m_platform.SkipDataType, reinterpret_cast<size_t>(&m_platform.SkipData));
+		m_err = cs_open(m_platform.Arch, m_platform.Mode, &CsHandle());
 	}
-	
+
+	csh&
+	CsHandle() override
+	{
+		return m_csh.Handle;
+	}
+
 //////////////////////////////////////////////////////////////////////////
 // runtime opcode info
 //////////////////////////////////////////////////////////////////////////
@@ -83,7 +45,7 @@ public:
 	{
 		std::unique_ptr<CS_INSN_HOLDER> i_holder(new CS_INSN_HOLDER(code, size));
 		if (i_holder.get())
-			i_holder->Count = cs_disasm_ex(m_csh.Handle, reinterpret_cast<const unsigned char*>(code), size, baseAddr, 0, &i_holder->Instructions);
+			i_holder->Count = cs_disasm_ex(CsHandle(), reinterpret_cast<const unsigned char*>(code), size, baseAddr, 0, &i_holder->Instructions);
 		return i_holder;
 	}
 
@@ -115,6 +77,8 @@ public:
 	}
 
 protected:
+	CS_HANDLE m_csh;
+
 	cs_err m_err;
 	CS_PLATFORM m_platform;
 };

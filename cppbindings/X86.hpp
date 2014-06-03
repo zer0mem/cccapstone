@@ -8,12 +8,8 @@ class CX86Arch :
 protected:
 	CX86Arch(
 		__in unsigned int mode,
-		__in cs_opt_type optType,
-		__in cs_opt_value optValue,
-		__in const char* comment,
-		__in cs_opt_type skipDataType,
-		__in cs_opt_skipdata skipData
-		) : CDisasmbler(mode, comment, cs_arch::CS_ARCH_X86, optType, optValue, skipDataType, skipData)
+		__in const char* comment
+		) : CDisasmbler(mode, comment, cs_arch::CS_ARCH_X86)
 	{
 	}
 
@@ -95,6 +91,6 @@ public:
 		__in cs_insn& inst
 		)
 	{
-		instructioninfox86::print_insn_detail(m_csh.Handle, m_platform.Mode, &inst);
+		instructioninfox86::print_insn_detail(CsHandle(), m_platform.Mode, &inst);
 	}
 };
