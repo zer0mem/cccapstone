@@ -2,11 +2,11 @@
 
 #include "X86.hpp"
 
-class CIntelDisasm64 :
+class CX86Disasm64 :
 	public CX86Arch
 {
 public:
-	CIntelDisasm64(
+	CX86Disasm64(
 		__in unsigned int mode = cs_mode::CS_MODE_64 + cs_mode::CS_MODE_LITTLE_ENDIAN,
 		__in cs_opt_type optType = cs_opt_type::CS_OPT_DETAIL,
 		__in cs_opt_value optValue = cs_opt_value::CS_OPT_ON,
@@ -18,11 +18,11 @@ public:
 	}
 };
 
-class CIntelDisasm86 :
+class CX86Disasm86 :
 	public CX86Arch
 {
 public:
-	CIntelDisasm86(
+	CX86Disasm86(
 		__in unsigned int mode = cs_mode::CS_MODE_32 + cs_mode::CS_MODE_LITTLE_ENDIAN,
 		__in cs_opt_type optType = cs_opt_type::CS_OPT_DETAIL,
 		__in cs_opt_value optValue = cs_opt_value::CS_OPT_ON,
@@ -34,11 +34,11 @@ public:
 	}
 };
 
-class CIntelDisasm16 :
+class CX86Disasm16 :
 	public CX86Arch
 {
 public:
-	CIntelDisasm16(
+	CX86Disasm16(
 		__in unsigned int mode = cs_mode::CS_MODE_16 + cs_mode::CS_MODE_LITTLE_ENDIAN,
 		__in cs_opt_type optType = cs_opt_type::CS_OPT_DETAIL,
 		__in cs_opt_value optValue = cs_opt_value::CS_OPT_ON,
