@@ -33,7 +33,7 @@ c++ bindings for capstone disasembly framework (http://www.capstone-engine.org/ 
     //set syntax for output disasembly string
     dis.SetSyntax(cs_opt_value::CS_OPT_SYNTAX_INTEL);
     
-    //set callback, when is encountered data - not resolved code -
+    //really OPTIONAL :) - set callback, when is encountered data - not resolved code -
     dis.SetSkipDataCallback(cs_opt_skipdata{ 
                                 ".UNKOWNBYTES : ", 
                                 SkipDataCallback, 
