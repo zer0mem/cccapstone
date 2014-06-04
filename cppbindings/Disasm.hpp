@@ -3,7 +3,6 @@
 #include "CsCapstoneWrap.h"
 #include "CsOpcodeInfoWrap.hpp"
 #include "CsAdvOptionsWrap.hpp"
-#include "InsInfo.hpp"
 
 class CDisasmbler :
 	protected CCsHandleHolder,
