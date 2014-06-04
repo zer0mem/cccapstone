@@ -2,9 +2,11 @@
 
 #include "CsCapstoneWrap.h"
 
-class CCsOpcodeInfoWrapper :
-	protected CCsHandleHolder
-{	
+class CCsOpcodeInfoWrapper
+{
+protected:
+	CS_HANDLE m_csh;
+
 protected:
 	__forceinline
 	bool 
@@ -13,7 +15,7 @@ protected:
 		__in unsigned int groupId
 		)
 	{
-		return cs_insn_group(CsHandle(), &ins, groupId);
+		return cs_insn_group(m_csh.Handle, &ins, groupId);
 	}
 
 	__forceinline
@@ -23,7 +25,7 @@ protected:
 		__in unsigned int regId
 		)
 	{
-		return cs_reg_read(CsHandle(), &ins, regId);
+		return cs_reg_read(m_csh.Handle, &ins, regId);
 	}
 
 	__forceinline
@@ -33,7 +35,7 @@ protected:
 		__in unsigned int regId
 		)
 	{
-		return cs_reg_write(CsHandle(), &ins, regId);
+		return cs_reg_write(m_csh.Handle, &ins, regId);
 	}
 
 	__forceinline
@@ -43,7 +45,7 @@ protected:
 		__in unsigned int opType
 		)
 	{
-		return cs_op_count(CsHandle(), &ins, opType);
+		return cs_op_count(m_csh.Handle, &ins, opType);
 	}
 
 	__forceinline
@@ -54,7 +56,7 @@ protected:
 		__in unsigned int opcodePosition = 0
 		)
 	{
-		return cs_op_index(CsHandle(), &ins, opType, opcodePosition);
+		return cs_op_index(m_csh.Handle, &ins, opType, opcodePosition);
 	}
 
 	__forceinline
@@ -63,7 +65,7 @@ protected:
 		__in unsigned int reg
 		)
 	{
-		return cs_reg_name(CsHandle(), reg);
+		return cs_reg_name(m_csh.Handle, reg);
 	}
 
 	__forceinline
@@ -72,6 +74,6 @@ protected:
 		__in unsigned int ins
 		)
 	{
-		return cs_insn_name(CsHandle(), ins);
+		return cs_insn_name(m_csh.Handle, ins);
 	}
 };

@@ -77,8 +77,6 @@ public:
 	}
 
 protected:
-	CS_HANDLE m_csh;
-
 	cs_err m_err;
 	CS_PLATFORM m_platform;
 };
