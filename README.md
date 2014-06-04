@@ -20,18 +20,27 @@ c++ bindings for capstone disasembly framework (http://www.capstone-engine.org/ 
     https://github.com/zer0mem/KernelProject/blob/capstone/KernelProject/src/CapstoneCppBindingsTest.hpp
     
 **4. examples by hand (intel x86 - x64)**
-
-    CX86Disasm64 dis; // define disasembler by current needs. 
-                      // cccapstone/cppbindings/<ARCHITECTURE>Disasm.hpp for more available bindings
-                      
+                
     /*
       f.e. for arm (vice versa with other architectures) can be 
-           capstone disasembler created in some ways : 
+           capstone disassembler created in some ways : 
            
-      CArmDisasm64 dis;
-      auto dis = CArm64Arch(cs_mode::CS_MODE_ARM + cs_mode::CS_MODE_BUG_ENDIAN, "arm in big endian")
-      auto dis = CDisasmbler(cs_mode::CS_MODE_ARM + cs_mode::CS_MODE_BUG_ENDIAN, "arm in big endian", cs_arch::CS_ARCH_ARM64)
+      1. use predefined wrapper
+        CArmDisasm64 dis;
+        
+      2. use architecture predefined wrapper
+        auto dis = CArm64Arch(cs_mode::CS_MODE_ARM + cs_mode::CS_MODE_BUG_ENDIAN, 
+                            "arm in big endian");
+                            
+      3. use direct wrapper above c implementation
+        auto dis = CDisasmbler(cs_mode::CS_MODE_ARM + cs_mode::CS_MODE_BUG_ENDIAN, 
+                            "arm in big endian", 
+                            cs_arch::CS_ARCH_ARM64);
     */
+    
+    CX86Disasm64 dis; // define disasembler by current needs. 
+                      // cccapstone/cppbindings/<ARCHITECTURE>Disasm.hpp for more available bindings
+      
     //check if no error occured
     if (dis.GetError())
     	return;
