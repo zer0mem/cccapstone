@@ -6,7 +6,7 @@ c++ bindings for capstone disasembly framework (http://www.capstone-engine.org/ 
 
 **1. clone all (bindings & capstone as well)**
 
-    git clone --recursive https://github.com/zer0mem/KernelProject.git
+    git clone --recursive https://github.com/zer0mem/cccapstone.git
 
 **2. basic settings**
 
