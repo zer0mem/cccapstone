@@ -23,7 +23,7 @@ public:
 		__in cs_arch arch
 		) : m_platform({ arch, static_cast<cs_mode>(mode), nullptr })
 	{
-		m_err = cs_open(m_platform.Arch, m_platform.Mode, &CsHandle());
+		m_err = cs_open(m_platform.Arch, m_platform.Mode, &m_csh.Handle);
 	}
 
 	csh&
