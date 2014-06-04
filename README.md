@@ -25,7 +25,7 @@ c++ bindings for capstone disasembly framework (http://www.capstone-engine.org/ 
                       // cccapstone/cppbindings/<ARCHITECTURE>Disasm.hpp for more available bindings
                       
     //check if no error occured
-		if (dis.GetError())
+	  if (dis.GetError())
 			return;
 			
 		//set how deep should capstone reverse instruction
