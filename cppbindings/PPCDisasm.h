@@ -1,15 +1,18 @@
 #pragma once
 
-#include "PPC.hpp"
+#include "Disasm.hpp"
+#include "CsIns.hpp"
+
+using CPPCInsClass = CCsIns<ppc_insn_group, ppc_reg, ppc_op_type, ppc_insn>;
 
 class CPPCDisasm :
-	public CPPCArch
+	public CCsDisasm<CPPCInsClass>
 {
 public:
 	CPPCDisasm(
 		__in unsigned int mode = cs_mode::CS_MODE_BIG_ENDIAN,
 		__in const char* comment = "PPC-64 (PPC syntax, big endian)"
-		) : CPPCArch(mode, comment)
+		) : CCsDisasm(mode, comment, cs_arch::CS_ARCH_PPC)
 	{
 	}
 };
