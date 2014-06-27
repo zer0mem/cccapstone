@@ -4,7 +4,7 @@
 #include "CsIns.hpp"
 
 using CArm64InsClass = CCsIns<arm64_insn_group, arm64_reg, arm64_op_type, arm64_insn>;
-using CArm86InsClass = CCsIns<arm_insn_group, arm_reg, arm_op_type, arm_insn>;
+using CArmInsClass = CCsIns<arm_insn_group, arm_reg, arm_op_type, arm_insn>;
 
 class CArmDisasm64 :
 	public CCsDisasm<CArm64InsClass>
@@ -17,8 +17,8 @@ public:
 	}
 };
 
-class CArmDisasm86 :
-	public CCsDisasm<CArm86InsClass>
+class CArmDisasm :
+	public CCsDisasm<CArmInsClass>
 {
 public:
 	CArmDisasm86(
