@@ -10,9 +10,12 @@ c++ bindings for capstone disasembly framework (http://www.capstone-engine.org/ 
 
 **2. basic settings**
 
-    add to Additional include directories capstone include : $(SolutionDir)/cccapstone/capstone/include
-    include c++ bindings to source / header 3rdparty files :
+    1. add to Additional include directories capstone include : $(SolutionDir)/cccapstone/capstone/include
+   
+    2. OPTIONAL (but not mandatory) include c++ bindings to source / header 3rdparty files
+    x86 example :
     --> \cccapstone\cppbindings\{ CsCapstoneHelper.hh, CsIns.hpp, Disasm.hpp, X86Disasm.hh }
+    --> \cccapstone\capstone\include\capstone.h
     
 
 **----------------------------------------------------------------------------------------**
