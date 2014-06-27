@@ -38,7 +38,7 @@ c++ bindings for capstone disasembly framework (http://www.capstone-engine.org/ 
       2. use direct wrapper above c implementation
         auto dis = CCsDisasm<CArm64InsClass>(
             cs_arch::CS_ARCH_ARM64,
-            cs_mode::CS_MODE_ARM + cs_mode::CS_MODE_BUG_ENDIAN);
+            cs_mode::CS_MODE_ARM + cs_mode::CS_MODE_BIG_ENDIAN);
     */
     
     CX86Disasm64 dis; // define disasembler by current needs. 
