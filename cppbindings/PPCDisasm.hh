@@ -10,9 +10,8 @@ class CPPCDisasm :
 {
 public:
 	CPPCDisasm(
-		__in unsigned int mode = cs_mode::CS_MODE_BIG_ENDIAN,
-		__in const char* comment = "PPC-64 (PPC syntax, big endian)"
-		) : CCsDisasm(mode, comment, cs_arch::CS_ARCH_PPC)
+		__in unsigned int mode = cs_mode::CS_MODE_BIG_ENDIAN
+		) : CCsDisasm(cs_arch::CS_ARCH_PPC, mode)
 	{
 	}
 };

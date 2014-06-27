@@ -1,26 +1,21 @@
 #pragma once
 
-#include "CsCapstoneHelper.h"
+#include "CsCapstoneHelper.hh"
 
 template<typename CsInsClass_t>
 class CCsDisasm
-{	
+{
+protected:
 	CS_HANDLE m_csh;
+	cs_err m_err;
 
-	struct CS_PLATFORM
-	{
-		cs_arch Arch;
-		cs_mode Mode;
-		const char* Comment;
-	};
 public:
 	CCsDisasm(
-		__in unsigned int mode,
-		__in const char* comment,
-		__in cs_arch arch
-		) : m_platform({ arch, static_cast<cs_mode>(mode), nullptr })
+		__in cs_arch arch,
+		__in unsigned int mode
+		)
 	{
-		m_err = cs_open(m_platform.Arch, m_platform.Mode, m_csh.get());
+		m_err = cs_open(arch, static_cast<cs_mode>(mode), m_csh.get());
 	}
 	
 //////////////////////////////////////////////////////////////////////////
@@ -199,8 +194,4 @@ public:
 			return false;
 		return !cs_option(*m_csh.get(), cs_opt_type::CS_OPT_SKIPDATA_SETUP, reinterpret_cast<size_t>(&dataCallbackSetup));
 	}
-
-protected:
-	cs_err m_err;
-	CS_PLATFORM m_platform;
 };

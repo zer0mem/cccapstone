@@ -10,9 +10,8 @@ class CXCoreCDisasm :
 {
 public:
 	CXCoreCDisasm(
-		__in cs_mode mode = cs_mode::CS_MODE_BIG_ENDIAN,
-		__in const char* comment = "XCore (XCORE syntax, big endian)"
-		) : CCsDisasm(mode, comment, cs_arch::CS_ARCH_XCORE)
+		__in cs_mode mode = cs_mode::CS_MODE_BIG_ENDIAN
+		) : CCsDisasm(cs_arch::CS_ARCH_XCORE, mode)
 	{
 	}
 };

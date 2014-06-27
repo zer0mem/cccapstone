@@ -10,9 +10,8 @@ class CSystemZCDisasm :
 {
 public:
 	CSystemZCDisasm(
-		__in cs_mode mode = cs_mode::CS_MODE_BIG_ENDIAN,
-		__in const char* comment = "SystemZ (SYSZ syntax, big endian)"
-		) : CCsDisasm(mode, comment, cs_arch::CS_ARCH_SYSZ)
+		__in cs_mode mode = cs_mode::CS_MODE_BIG_ENDIAN
+		) : CCsDisasm(cs_arch::CS_ARCH_SYSZ, mode)
 	{
 	}
 };

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <capstone.h>
-#include "CsCapstoneHelper.h"
+#include "CsCapstoneHelper.hh"
 
 //x86_insn_group, x86_reg, x86_op_type, x86_insn
 template<typename InsGroup_t, typename Reg_t, typename Op_t, typename Ins_t>
