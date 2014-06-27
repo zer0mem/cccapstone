@@ -79,7 +79,7 @@ c++ bindings for capstone disasembly framework (http://www.capstone-engine.org/ 
     //how to gather advanced info is by example in debug-print function 
     --> print_insn_detail (https://github.com/aquynh/capstone/blob/master/tests/test_x86.c)
     
-    //in future in capstone will be possible also filtering group of instructions (adn far more .. :)
+    //in future in capstone will be possible also filtering group of instructions (and far more .. :)
     if (insn->Instructions(i).IsInInsGroup(x86_insn_group::X86_GRP_JUMP))
         printf("\nControl Flow change at : %p", insn->Instructions(i).address);
     
