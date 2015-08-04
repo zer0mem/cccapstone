@@ -17,30 +17,21 @@ public:
 	{
 		m_err = cs_open(arch, static_cast<cs_mode>(mode), m_csh.get());
 	}
+
+	typedef CS_INSN_HOLDER<CsInsClass_t> ins_holder_t;
 	
 //////////////////////////////////////////////////////////////////////////
 // runtime opcode info
 //////////////////////////////////////////////////////////////////////////
-	__checkReturn
-	std::unique_ptr< CS_INSN_HOLDER<CsInsClass_t> >
+	__forceinline
+	ins_holder_t*
 	Disasm(
 		__in const void* code,
 		__in size_t size,
 		__in size_t baseAddr = 0
 		)
 	{
-		std::unique_ptr< CS_INSN_HOLDER<CsInsClass_t> > i_holder(new CS_INSN_HOLDER<CsInsClass_t>(m_csh, code, size));
-		if (i_holder.get())
-		{
-			i_holder->Count = cs_disasm_ex(
-				*m_csh.get(), 
-				static_cast<const unsigned char*>(code), 
-				size, 
-				baseAddr, 
-				0, 
-				&i_holder->CsInstructions);
-		}
-		return i_holder;
+		return new ins_holder_t(m_csh, code, size, baseAddr);
 	}
 
 	__forceinline
